@@ -4,6 +4,11 @@ Array tools for develpoment convinience. By TCL @Raven
 
 import numpy as np
 
+# type constants
+TYPE_INVALID = -1
+TYPE_PYTHON_LIST = 0
+TYPE_NUMPY_LIST = 1
+
 def cast_to_onehot(labels=None, target_type=np.float32):
     """
     This function is used for conver a normal array or numpy.ndarray to
@@ -29,17 +34,17 @@ def cast_to_onehot(labels=None, target_type=np.float32):
         return None
 
     param_type = type(labels)
-    param_type_i = -1
+    param_type_i = TYPE_INVALID
     if param_type == list:
-        param_type_i = 0
+        param_type_i = TYPE_PYTHON_LIST
     elif param_type == np.ndarray:
-        param_type_i = 1
+        param_type_i = TYPE_NUMPY_LIST
     else:
         print "error with param type(not a list or numpy.ndarray)."
         return None
 
     try:
-        if param_type_i == 0:
+        if param_type_i == TYPE_PYTHON_LIST:
             labels = np.asarray(labels, dtype=target_type)
 
         if len(labels.shape) > 1:
@@ -96,3 +101,74 @@ def cast_strlabels_to_intlabels(labels=None, categories=None):
         ilabels = [1, 3, 2, 5]
         param2 = {1:"cate1", 2:"cate2", 3:"cate3", 4:"cate4", 5:"cate5"}
     """
+    if (labels == None):
+        print "invalid labels, maybe a none param."
+        return None, None
+
+    labels_type = type(labels)
+    param_type = TYPE_INVALID
+    if (labels_type == list):
+        param_type = TYPE_PYTHON_LIST
+    elif (labels_type == np.ndarray):
+        param_type = TYPE_NUMPY_LIST
+    else:
+        print "invalid type of first param 'labels'."
+        return None, None
+
+    if (categories == None):
+        categories = drop_repeat_in_list(labels)
+    else:
+        categories = drop_repeat_in_list(categories)
+
+    categories_with_index = {}
+    intlabels = []
+
+    for i in range(1, len(categories) + 1):
+        categories_with_index[i] = categories[i-1]
+
+    for i in labels:
+        intlabels.append((categories_with_index.keys())[(categories_with_index.values()).index(i)])
+
+    return intlabels, categories_with_index
+
+
+
+def drop_repeat_in_list(source=None, sort=False):
+    """
+    To drop the repeat element in an list.
+    the type of list could be a python list or numpy.ndarray.
+
+    @param1 source: which list you want to be handled.
+
+    @param2 sort: whether to handle the list by sort.
+
+    @return: a handled list.
+    """
+    if (source == None):
+        print "invalid param 'source'."
+        return None
+
+    source_type = type(source)
+    param_type = TYPE_INVALID
+    if (source_type == list):
+        param_type = TYPE_PYTHON_LIST
+    elif (source_type == np.ndarray):
+        param_type = TYPE_NUMPY_LIST
+    else:
+        print "invalid type of first param 'source'."
+        return None
+
+    if (param_type == TYPE_NUMPY_LIST):
+        source = source.tolist()
+
+    target = []
+    for i in source:
+        try:
+            index = target.index(i)
+        except:
+            target.append(i)
+
+    if (sort == True):
+        target.sort()
+
+    return target
