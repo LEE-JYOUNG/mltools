@@ -15,7 +15,14 @@ def cast_to_onehot(labels=None, target_type=np.float32):
 
     @param target_type: for our usage, it is only be numpy.float32 or numpy.float64.
 
-    @return a numpy.ndarray with the 'onehot' structure.
+    @return a numpy.ndarray with the 'onehot' structure. FOR EXAMPLE:
+            input: [2, 3, 1, 2, 4]
+            output:
+                    [[0., 1., 0., 0.],
+                     [0., 0., 1., 0.],
+                     [1., 0., 0., 0.],
+                     [0., 1., 0., 0.],
+                     [0., 0., 0., 1.]]
     """
     if labels == None:
         print "find a none array."
@@ -36,7 +43,7 @@ def cast_to_onehot(labels=None, target_type=np.float32):
             labels = np.asarray(labels, dtype=target_type)
 
         if len(labels.shape) > 1:
-            print "labels should be an one demention array."
+            print "labels should be an one dimension array."
             return None
 
         target_row = len(labels)
@@ -49,7 +56,7 @@ def cast_to_onehot(labels=None, target_type=np.float32):
         min_element = labels[np.argmin(labels)]
 
         if (min_element < 1):
-            print "labels should be considered as an array which start from 1 to a more number, not start from 0."
+            print "labels should be considered as an array which start from 1 to a bigger number, not start from 0."
             return None
 
         labels_ = labels - 1
