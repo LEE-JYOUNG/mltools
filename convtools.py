@@ -1,7 +1,7 @@
 """
 A toolkit for figuring out some problems when doing thing with NN.
 NN in tensorflow, maybe is unfit to other NN libs(such as Caffe etc.).
-(Nerual Network) By TCL @Raven
+(Nerual Network) By @Raven
 """
 
 import numpy as np
