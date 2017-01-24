@@ -2,22 +2,23 @@
 A toolkit for figuring out some problems when doing thing with NN.
 NN in tensorflow, maybe is unfit to other NN libs(such as Caffe etc.).
 
-(Nerual Network) By TCL @Raven & @Lee
+(Nerual Network) By @Raven & @Lee
 
 """
 
 import numpy as np
 import math as mt
 
+# the 'same' type of zero padding which add zeros so that the all pixels
+# of Input-image can be pooled or convoluted by their filter, when the
+# count of zero-padding is odd, the top side always smaller than the
+# bottom side and the left side always smaller than the right side.
 PADDING_TYPE_SAME = "same"
-"""
-the 'same' type of zero padding which add zeros so that the all pixels of Input-image can be pooled or convoluted by their filter, 
-when padding zero is odd, the top side always smaller than the bottom side and the left side always smaller than the right side.
-"""
+
+# the 'valid' type of zero padding which drops the right-most columns
+# or bottom rows in case of these columns cannot pooled or convoluted
+# by their filter
 PADDING_TYPE_VALID = "valid"
-"""
-the 'valid' type of zero padding which drops the right-most columns or bottom rows in case of these columns cannot pooled or convoluted by their filter
-"""
 
 def width_and_height_after_conv_image(input_width=None, input_height=None, filter_width=1, filter_height=1, hstride=1, vstride=1, padding_type=PADDING_TYPE_SAME):
     """
@@ -34,7 +35,7 @@ def width_and_height_after_conv_image(input_width=None, input_height=None, filte
 
     @return: when the padding_type is same, the function will return four results, @first is the output image's width,
         @second is the output image's height, @third is the padding zero width, @fourth is the padding zero height.
-        when the padding_type is valid ,the function will return two results, @first is the output image's width, 
+        when the padding_type is valid ,the function will return two results, @first is the output image's width,
         @second is the output image's height. (padding_along_width == padding_along_height == 0)
 
     FOR EXAMPLE:
@@ -54,18 +55,12 @@ def width_and_height_after_conv_image(input_width=None, input_height=None, filte
 
         print ("out_width:%-8d out_height:%-8d padding_along_width:%-8d padding_along_height:%8d"%(out_width, out_height, padding_along_width, padding_along_height))
         return ([out_width, out_height], [padding_along_width, padding_along_height])
-    else:
-        print "I DON'T KNOW. SORRY."
-        return None
-
-
-    if(padding_type == PADDING_TYPE_VALID):
+    elif(padding_type == PADDING_TYPE_VALID):
         out_width = ceil(float(input_width - filter_width + 1) / float(hstride))
         out_height = ceil(float(input_height - filter_height + 1) / float(vstride))
 
         print ("out_width:%-8d out_height:%-8d "%(out_width, out_height))
         return ([out_width, out_height])
-
     else:
-        print "I DON'T KNOW. SORRY."
+        print "Invalid type."
         return None
