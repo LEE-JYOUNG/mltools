@@ -1,5 +1,5 @@
 """
-Array tools for develpoment convinience. By TCL @Raven
+Array tools for develpoment convinience. By @Raven
 """
 
 import numpy as np

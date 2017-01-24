@@ -1,7 +1,9 @@
 """
 A toolkit for figuring out some problems when doing thing with NN.
 NN in tensorflow, maybe is unfit to other NN libs(such as Caffe etc.).
+
 (Nerual Network) By TCL @Raven & @Lee
+
 """
 
 import numpy as np
@@ -55,6 +57,7 @@ def width_and_height_after_conv_image(input_width=None, input_height=None, filte
     else:
         print "I DON'T KNOW. SORRY."
         return None
+
 
     if(padding_type == PADDING_TYPE_VALID):
         out_width = ceil(float(input_width - filter_width + 1) / float(hstride))
