@@ -47,7 +47,7 @@ def convert_images_to_nparray_by_PIL(source_images=[], dtype=np.int64, flatten=T
     """
     To conver the pixels of image to a numpy array.
 
-    @param source_images: an array which contains some PIL datas.
+    @param source_images: an array which contains some PIL datas. type[list]
                             FOR EXAMPLE:
                             pic1 = Image.open("...")
                             pic2 = Image.open("...")
@@ -60,7 +60,7 @@ def convert_images_to_nparray_by_PIL(source_images=[], dtype=np.int64, flatten=T
                             @return : [[pixel1_R, pixel1_G, pixel1_B, pixel2_R, pixel2_G, pixel2_B, ... pixel_last_R, pixel_last_G, pixel_last_B], #data1
                                        [pixel1_R, pixel1_G, pixel1_B, pixel2_R, pixel2_G, pixel2_B, ... pixel_last_R, pixel_last_G, pixel_last_B]  #data2 ]
 
-    @param dtype: numpy type of the array for returning.
+    @param dtype: numpy type of the array for returning. type[type]
 
     @param flatten: whether flatten the array, if False the result will likes this
                     [[[pixel1_R, pixel1_G, pixel1_B],
@@ -72,10 +72,10 @@ def convert_images_to_nparray_by_PIL(source_images=[], dtype=np.int64, flatten=T
                      [pixel_last_R, pixel_last_G, pixel_last_B]]
                      data2
                     ]
-                    and the shape is [2, (image_width * image_heigh), 3] (if bands is 'RGB').
+                    and the shape is [2, (image_width * image_heigh), 3] (if bands is 'RGB'). type[bool]
 
 
-    @return : a numpy array that contains all the pixels data.
+    @return : a list ofnumpy array that contains all the pixels data. type[list]
     """
     # TO BE IMPLEMENTED.
 
@@ -85,6 +85,6 @@ def convert_images_to_nparray_by_filenames(source_images=[], dtype=np.int64, fla
 
     to see details pls checkout the 'imagetools.convert_images_to_nparray_by_PIL'
 
-    @param source_images: an array which contains some image file paths.
+    @param source_images: an array which contains some image file paths. type[list]
     """
     # TO BE IMPLEMENTED.
