@@ -9,15 +9,16 @@ NN in tensorflow, maybe is unfit to other NN libs(such as Caffe etc.).
 import numpy as np
 import math as mt
 
+# the 'same' type of zero padding which add zeros so that the all pixels
+# of Input-image can be pooled or convoluted by their filter, when the
+# count of zero-padding is odd, the top side always smaller than the
+# bottom side and the left side always smaller than the right side.
 PADDING_TYPE_SAME = "same"
-"""
-the 'same' type of zero padding which add zeros so that the all pixels of Input-image can be pooled or convoluted by their filter, 
-when padding zero is odd, the top side always smaller than the bottom side and the left side always smaller than the right side.
-"""
+
+# the 'valid' type of zero padding which drops the right-most columns
+# or bottom rows in case of these columns cannot pooled or convoluted
+# by their filter
 PADDING_TYPE_VALID = "valid"
-"""
-the 'valid' type of zero padding which drops the right-most columns or bottom rows in case of these columns cannot pooled or convoluted by their filter
-"""
 
 def width_and_height_after_conv_image(input_width=None, input_height=None, filter_width=1, filter_height=1, hstride=1, vstride=1, padding_type=PADDING_TYPE_SAME):
     """
